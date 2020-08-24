@@ -1,26 +1,43 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import SortingVisualizer from './SortingVisualizer/SortingVisualizer';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.lililili
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends React.Component {
+
+	constructor(props){
+		super(props);
+		this.state = {};
+	}
+ 
+
+
+
+  render(){
+    
+    return (
+      <div className="App">
+        <header className="App-header">
+            {/* <Button variant="outline-info">Generate new list </Button> */}
+            {/* <Button variant="outline-info">GO! </Button> */}
+            <DropdownButton id="dropdown-item-button" title="Choose an algo.">
+              <Dropdown.Item as="button">Bubble Sort</Dropdown.Item>
+              <Dropdown.Item as="button">Insertion Sort</Dropdown.Item>
+              <Dropdown.Item as="button">Merge Sort</Dropdown.Item>
+            </DropdownButton>
+        </header>
+
+        <SortingVisualizer/>
+
+      </div>
+    );
+
+  }
+
 }
 
 export default App;
