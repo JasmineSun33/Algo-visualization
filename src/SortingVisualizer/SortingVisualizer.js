@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './SortingVisualizer.css';
+// import {getMergeSortAnimations} from './solutionAlgo';
+import {getMergeSortAnimations} from './algo';
 import Button from 'react-bootstrap/Button';
 // import DropdownButton from 'react-bootstrap/DropdownButton';
 // import Dropdown from 'react-bootstrap/Dropdown';
@@ -12,7 +14,8 @@ export default class SortingVisualizer extends Component {
 		super(props);
 		this.state = {
             size: 8,
-						array:[8,8,8],
+						array:[],
+						referenceArray:[],
 						sortingMethod: 'MergeSort',     // Merge, Bubble, Quick, Insertion
 				};
 
@@ -31,15 +34,37 @@ export default class SortingVisualizer extends Component {
 			newArray.push(randomNum);
 		};
 		this.setState({array: newArray});
+		this.setState({referenceArray: newArray.slice()});
 
 	}
 
 	startSortingHandler(array){
-		console.log("ok i start");
 		console.log("unsorted array is ", this.state.array);
-		var sortedArray = this.mergeSort(array.slice());
-		this.setState({array: sortedArray});
-		
+		// this.setState({array: sortedArray});
+
+		var solutionAnimation = getMergeSortAnimations(this.state.array.slice());
+
+		console.log("animation array is ", solutionAnimation);
+
+		solutionAnimation.forEach((action, index) => {
+			setTimeout(() => {
+				const [oldIndex, newIndex] = action;
+
+				var newArray = this.state.array.slice();
+				// var temp = newArray[oldIndex];
+				// newArray[oldIndex] = this.state.referenceArray[newIndex];    
+				// newArray[newIndex] = temp;
+				// this.setState({array: newArray});
+
+			}, 3 * (index + 1));
+		});
+
+		solutionAnimation.forEach( action => {
+
+
+
+		})
+
 	}
 
 	mergeSort(arr){
@@ -68,7 +93,7 @@ export default class SortingVisualizer extends Component {
 		}
 
 		let returnList = arr.concat(left.slice(i).concat(right.slice(j)));
-		console.log("return list is: ", returnList );
+	
 
 		return returnList;
 	}
