@@ -7,8 +7,8 @@ import Button from 'react-bootstrap/Button';
 // import Dropdown from 'react-bootstrap/Dropdown';
 import shortid from "shortid";
 
-const ARRAY_SIZE = 100;
-const SPEED = 100;
+const ARRAY_SIZE = 300;
+const SPEED = 10;
 const HEIGHT_FACTOR = 2.5;
 const WIDTH_FACTOR = 1000;
 
@@ -58,19 +58,17 @@ export default class SortingVisualizer extends Component {
 		solutionAnimation.forEach((animation, index) => {
 			setTimeout(() => {
 
-				var newArray = this.state.array.slice();
 				
-
-				for(var i = 0; i < animation.sortedArray.length; i ++){
 					const arrayBars = document.getElementsByClassName('Array-bar');
-					const newHeight = animation.sortedArray[i] / HEIGHT_FACTOR;
-					arrayBars[i+ animation.startIndex].style.height = `${newHeight}px`;
+					const oldIndex = animation[0];
+					const newHeight = animation[1] / HEIGHT_FACTOR;
+					arrayBars[oldIndex].style.height = `${newHeight}px`;
 	
-					console.log("I run: ", i)
+					// console.log("I run: ", i)
 					// newArray[i+ animation.startIndex] = animation.sortedArray[i];
 					// this.setState({array: newArray});
 			
-				}
+		
 
 
 

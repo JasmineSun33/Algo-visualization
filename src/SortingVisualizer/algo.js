@@ -62,7 +62,13 @@ function merge_helper(arr,copiedArr,animationArray,startIndex,middleIndex,endInd
         endIndex: endIndex,
         sortedArray:finalizedArray,
     }
-    animationArray.push(animationObj);
+
+    for(var i=startIndex; i< endIndex; i++){
+        animationArray.push([i,finalizedArray[i-startIndex]]);      //oldIndex, newValue
+        
+
+    }
+    // animationArray.push(animationObj);
 
     
     
@@ -77,3 +83,5 @@ function merge_helper(arr,copiedArr,animationArray,startIndex,middleIndex,endInd
 
 
 }
+
+
