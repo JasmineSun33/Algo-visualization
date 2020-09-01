@@ -28,16 +28,17 @@ function merge_helper(arr,copiedArr,animationArray,startIndex,middleIndex,endInd
     let mergedArray = [];
     var i = startIndex ,j = middleIndex ;
     var newIndex = startIndex;
+
     // animationArray.push([startIndex, endIndex]);  // 第一次，signal在操作哪一个部分 一头一尾  
     while ( i < middleIndex && j < endIndex) {
 
         if (arr[i] < arr[j]) {
-            animationArray.push([i,newIndex]);      //第二次， change bar length
+            // animationArray.push([i,newIndex]);      //第二次， change bar length
             mergedArray.push(arr[i]); 
 
             i++;
         } else {
-            animationArray.push([j,newIndex]);
+            // animationArray.push([j,newIndex]);
             mergedArray.push(arr[j]); 
       
             j++
@@ -49,13 +50,27 @@ function merge_helper(arr,copiedArr,animationArray,startIndex,middleIndex,endInd
     var finalizedArray;
     if( i === middleIndex){
         finalizedArray = mergedArray.concat(arr.slice(j, endIndex));
-        animationArray.push([j,newIndex]);
+        // animationArray.push([j,newIndex]);
 
     }else{
         finalizedArray = mergedArray.concat(arr.slice(i, middleIndex));
-        animationArray.push([i,newIndex]);
+        // animationArray.push([i,newIndex]);
       
     }
+    var animationObj = {
+        startIndex:startIndex,
+        endIndex: endIndex,
+        sortedArray:finalizedArray,
+    }
+
+    for(var i=startIndex; i< endIndex; i++){
+        animationArray.push([i,finalizedArray[i-startIndex]]);      //oldIndex, newValue
+        
+
+    }
+    // animationArray.push(animationObj);
+
+    
     
     
 
@@ -68,3 +83,5 @@ function merge_helper(arr,copiedArr,animationArray,startIndex,middleIndex,endInd
 
 
 }
+
+

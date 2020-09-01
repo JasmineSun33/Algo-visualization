@@ -29,9 +29,16 @@ class App extends React.Component {
               <Dropdown.Item as="button">Insertion Sort</Dropdown.Item>
               <Dropdown.Item as="button">Merge Sort</Dropdown.Item>
             </DropdownButton>
+            <DropdownButton id="dropdown-item-button" title="Choose speed/size.">
+              <Dropdown.Item as="button">fast</Dropdown.Item>
+              <Dropdown.Item as="button">mid</Dropdown.Item>
+              <Dropdown.Item as="button">low</Dropdown.Item>
+            </DropdownButton>
+            <div>xxx comparson has done. xx% completed</div>
         </header>
 
         <SortingVisualizer/>
+        <div className="article">article about xxxx sorting algorithm</div>
 
       </div>
     );

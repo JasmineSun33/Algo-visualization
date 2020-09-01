@@ -7,13 +7,19 @@ import Button from 'react-bootstrap/Button';
 // import Dropdown from 'react-bootstrap/Dropdown';
 import shortid from "shortid";
 
+const ARRAY_SIZE = 300;
+const SPEED = 10;
+const HEIGHT_FACTOR = 2.5;
+const WIDTH_FACTOR = 1000;
+
+
 
 export default class SortingVisualizer extends Component {
 
 	constructor(props){
 		super(props);
 		this.state = {
-            size: 8,
+            size: ARRAY_SIZE,
 						array:[],
 						referenceArray:[],
 						sortingMethod: 'MergeSort',     // Merge, Bubble, Quick, Insertion
@@ -46,24 +52,35 @@ export default class SortingVisualizer extends Component {
 
 		console.log("animation array is ", solutionAnimation);
 
-		solutionAnimation.forEach((action, index) => {
-			setTimeout(() => {
-				const [oldIndex, newIndex] = action;
 
-				var newArray = this.state.array.slice();
+
+
+		solutionAnimation.forEach((animation, index) => {
+			setTimeout(() => {
+
+				
+					const arrayBars = document.getElementsByClassName('Array-bar');
+					const oldIndex = animation[0];
+					const newHeight = animation[1] / HEIGHT_FACTOR;
+					arrayBars[oldIndex].style.height = `${newHeight}px`;
+	
+					// console.log("I run: ", i)
+					// newArray[i+ animation.startIndex] = animation.sortedArray[i];
+					// this.setState({array: newArray});
+			
+		
+
+
+
+
 				// var temp = newArray[oldIndex];
 				// newArray[oldIndex] = this.state.referenceArray[newIndex];    
 				// newArray[newIndex] = temp;
-				// this.setState({array: newArray});
+				
 
-			}, 3 * (index + 1));
+			}, SPEED * (index + 1));
 		});
 
-		solutionAnimation.forEach( action => {
-
-
-
-		})
 
 	}
 
@@ -119,7 +136,7 @@ export default class SortingVisualizer extends Component {
 						<div 
 							className='Array-bar' 
 							key={shortid.generate()}
-							style={{height:`${value / 2.5}px`, width: `${1000 / this.state.size}px`}}>
+							style={{height:`${value / HEIGHT_FACTOR}px`, width: `${WIDTH_FACTOR / this.state.size}px`}}>
 						</div>
 					))}
 				</div>
