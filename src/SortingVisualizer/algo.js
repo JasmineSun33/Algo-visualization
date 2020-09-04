@@ -8,20 +8,15 @@ function mergeSort(arr,copiedArr, animationArray, startIndex, endIndex){
     if (endIndex - startIndex <= 1) {
         return arr;
     }
-    console.log("array length is: ", arr.length);
-    // var newCopiedArr = arr.slice();
+
     const middleIndex = Math.floor((startIndex + endIndex) / 2);
     // sort left-half
     mergeSort(arr,copiedArr,animationArray,startIndex,middleIndex);
-    
     // sort right-half
     mergeSort(arr,copiedArr,animationArray,middleIndex,endIndex);
-    
     merge_helper(arr, copiedArr,animationArray,startIndex,middleIndex,endIndex);
 
     return animationArray;
-    // return arr;
-
 }
 
 function merge_helper(arr,copiedArr,animationArray,startIndex,middleIndex,endIndex){
@@ -57,22 +52,14 @@ function merge_helper(arr,copiedArr,animationArray,startIndex,middleIndex,endInd
         // animationArray.push([i,newIndex]);
       
     }
-    var animationObj = {
-        startIndex:startIndex,
-        endIndex: endIndex,
-        sortedArray:finalizedArray,
-    }
 
-    for(var i=startIndex; i< endIndex; i++){
+
+    for(i=startIndex; i< endIndex; i++){
         animationArray.push([i,finalizedArray[i-startIndex]]);      //oldIndex, newValue
         
 
     }
     // animationArray.push(animationObj);
-
-    
-    
-    
 
     // update mergeArray into the original array
     //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
@@ -84,4 +71,97 @@ function merge_helper(arr,copiedArr,animationArray,startIndex,middleIndex,endInd
 
 }
 
+
+export function getInsertionSortAnimations(array){
+
+    var n = array.length;
+
+    var animationArray = []; 
+        // Invariant: array[:i] is sorted
+        for(var i=1; i< n; i++){
+            var currValue = array[i];
+    
+            var insertIndex = i-1;
+            while( insertIndex >= 0 && array[insertIndex] >= currValue){
+                array[insertIndex+1] = array[insertIndex];
+                animationArray.push([insertIndex+1, array[insertIndex]]);        // oldIndex, newValue
+                insertIndex --;
+            }
+            //insert at the correct index
+            array[insertIndex+1] = currValue;
+            animationArray.push([insertIndex+1, currValue]);
+            // console.log(array.slice(0,i))
+        }
+        return animationArray;
+}
+
+export function getQuickSortAnimations(array){
+    var animationArray = []; 
+
+    return quickSort(array, 0, array.length -1, animationArray)
+
+
+}
+function quickSort(array, left,right, animationArray){
+
+    if(array.length > 1){
+        var middleIndex = partition(array, left, right,animationArray);
+        if (middleIndex - left > 1){
+            quickSort(array, left, middleIndex - 1, animationArray);
+        }
+        if(right - middleIndex > 1){
+            quickSort(array, middleIndex, right, animationArray);
+        }
+    }
+    return animationArray;
+}
+
+function partition(array, left, right,animationArray) {
+    var pivot   = array[Math.floor((right + left) / 2)], //middle element
+        i       = left, //left pointer
+        j       = right; //right pointer
+    while (i <= j) {
+        while (array[i] < pivot) {
+            i++;
+        }
+        while (array[j] > pivot) {
+            j--;
+        }
+        if (i <= j) {      // 如果两个人都卡住了
+            // console.log([ i, array[j] ])
+    
+            animationArray.push([i, array[j]]);   //old Index, new value
+            animationArray.push([j, array[i]]);   //old Index, new value
+            swap(array, i, j); //sawpping two elements
+            i++;
+            j--;
+        }
+    }
+
+    return i;
+}
+
+export function getBubbleSortAnimations(array){
+    var animationArray = []; 
+    let len = array.length;
+    for (let i = 0; i < len; i++) {
+        for (let j = 0; j < len; j++) {
+            if (array[j] > array[j + 1]) {
+                // swap j and j+1 
+                animationArray.push([j, array[j+1]]);   
+                animationArray.push([j+1, array[j]]);   
+                swap(array,j,j+1);
+
+            }
+        }
+    }
+    return animationArray;
+};
+
+
+function swap(array, leftIndex, rightIndex){
+    var temp = array[leftIndex];
+    array[leftIndex] = array[rightIndex];
+    array[rightIndex] = temp;
+}
 
