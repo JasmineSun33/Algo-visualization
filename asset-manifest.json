@@ -1,23 +1,25 @@
 {
   "files": {
-    "main.css": "/Algo-visualization/static/css/main.5f361e03.chunk.css",
-    "main.js": "/Algo-visualization/static/js/main.e27d1133.chunk.js",
-    "main.js.map": "/Algo-visualization/static/js/main.e27d1133.chunk.js.map",
+    "main.css": "/Algo-visualization/static/css/main.9924039b.chunk.css",
+    "main.js": "/Algo-visualization/static/js/main.589da56b.chunk.js",
+    "main.js.map": "/Algo-visualization/static/js/main.589da56b.chunk.js.map",
     "runtime-main.js": "/Algo-visualization/static/js/runtime-main.ff97240a.js",
     "runtime-main.js.map": "/Algo-visualization/static/js/runtime-main.ff97240a.js.map",
-    "static/js/2.64e9ff3c.chunk.js": "/Algo-visualization/static/js/2.64e9ff3c.chunk.js",
-    "static/js/2.64e9ff3c.chunk.js.map": "/Algo-visualization/static/js/2.64e9ff3c.chunk.js.map",
+    "static/css/2.11829350.chunk.css": "/Algo-visualization/static/css/2.11829350.chunk.css",
+    "static/js/2.6113c77d.chunk.js": "/Algo-visualization/static/js/2.6113c77d.chunk.js",
+    "static/js/2.6113c77d.chunk.js.map": "/Algo-visualization/static/js/2.6113c77d.chunk.js.map",
     "index.html": "/Algo-visualization/index.html",
-    "precache-manifest.d8ee67e75d93092fb1a3519c3737d953.js": "/Algo-visualization/precache-manifest.d8ee67e75d93092fb1a3519c3737d953.js",
+    "precache-manifest.eb77e05a304750387a2363586ba21241.js": "/Algo-visualization/precache-manifest.eb77e05a304750387a2363586ba21241.js",
     "service-worker.js": "/Algo-visualization/service-worker.js",
-    "static/css/main.5f361e03.chunk.css.map": "/Algo-visualization/static/css/main.5f361e03.chunk.css.map",
-    "static/js/2.64e9ff3c.chunk.js.LICENSE.txt": "/Algo-visualization/static/js/2.64e9ff3c.chunk.js.LICENSE.txt",
-    "static/media/logo.svg": "/Algo-visualization/static/media/logo.5d5d9eef.svg"
+    "static/css/2.11829350.chunk.css.map": "/Algo-visualization/static/css/2.11829350.chunk.css.map",
+    "static/css/main.9924039b.chunk.css.map": "/Algo-visualization/static/css/main.9924039b.chunk.css.map",
+    "static/js/2.6113c77d.chunk.js.LICENSE.txt": "/Algo-visualization/static/js/2.6113c77d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ff97240a.js",
-    "static/js/2.64e9ff3c.chunk.js",
-    "static/css/main.5f361e03.chunk.css",
-    "static/js/main.e27d1133.chunk.js"
+    "static/css/2.11829350.chunk.css",
+    "static/js/2.6113c77d.chunk.js",
+    "static/css/main.9924039b.chunk.css",
+    "static/js/main.589da56b.chunk.js"
   ]
 }
