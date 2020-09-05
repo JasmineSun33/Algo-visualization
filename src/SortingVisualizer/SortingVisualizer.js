@@ -18,7 +18,6 @@ export default class SortingVisualizer extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-            size: ARRAY_SIZE,
 			array:[],
 			referenceArray:[],
 			sortingMethod: 'MergeSort',     // Merge, Bubble, Quick, Insertion
@@ -36,7 +35,7 @@ export default class SortingVisualizer extends Component {
 	generateNewArray(){
 
 		var newArray = [];
-		for(var i=0; i< this.state.size; i++){
+		for(var i=0; i< this.props.size; i++){
 			var randomNum = randomIntFromInterval(10,1000);
 			newArray.push(randomNum);
 		};
@@ -70,7 +69,7 @@ export default class SortingVisualizer extends Component {
 
 
   render(){
-
+		console.log("child component size:", this.props.size)
 		const {array} = this.state;
 
 
@@ -90,7 +89,7 @@ export default class SortingVisualizer extends Component {
 						<div 
 							className='Array-bar' 
 							key={shortid.generate()}
-							style={{height:`${value / HEIGHT_FACTOR}px`, width: `${WIDTH_FACTOR / this.state.size}px`}}>
+							style={{height:`${value / HEIGHT_FACTOR}px`, width: `${WIDTH_FACTOR / this.props.size}px`}}>
 						</div>
 					))}
 				</div>
