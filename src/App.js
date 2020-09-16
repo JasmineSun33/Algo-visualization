@@ -8,10 +8,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col'
 
-const DEFAULT_SIZE = 100;
+
 const SPEED = 5;
-const HEIGHT_FACTOR = 2.5;
-const WIDTH_FACTOR = 1000;
 
 
 const MERGE_SORT = "MERGE_SORT";
@@ -31,19 +29,23 @@ class App extends React.Component {
 		this.state = {
       arraySize: MEDIUM_INPUT,
 			sortingMethod: MERGE_SORT,     // Merge, Bubble, Quick, Insertion
-			isFinished: false,
+			isFinished: true,
 			isPause: false,
     };
     this.changeInputSizeHandler = this.changeInputSizeHandler.bind(this);
 
   }
+
   
   changeInputSizeHandler(event){
     const newSize = event.target.value;
     this.setState({arraySize: newSize});
-    console.log(this.state)
+    
   }
-  changeMethodHandler(){
+  changeMethodHandler(event){
+    const newMethod = event.target.value;
+    this.setState({sortingMethod: newMethod});
+
     
   }
  
@@ -61,7 +63,9 @@ class App extends React.Component {
               <Col>
               <Form.Group controlId="exampleForm.SelectCustomSizeSm">
                 <Form.Label>Choose an algorithm</Form.Label>
-                <Form.Control as="select" size="sm" custom onChange={this.changeMethodHandler.bind(this)} >
+                <Form.Control as="select" size="sm" custom 
+                    // disabled={true}
+                    onChange={this.changeMethodHandler.bind(this)} >
                   <option value={MERGE_SORT}>Merge Sort</option>
                   <option value={QUICK_SORT}>Quick Sort</option>
                   <option value={INSERTION_SORT}>Insertion Sort</option>
@@ -73,9 +77,11 @@ class App extends React.Component {
               <Col>
                 <Form.Group controlId="exampleForm.SelectCustomSizeSm">
                   <Form.Label>Input Size</Form.Label>
-                  <Form.Control as="select" size="sm" custom onChange={ this.changeInputSizeHandler}>
+                  <Form.Control as="select" size="sm" custom 
+                    // disabled={true}
+                    onChange={ this.changeInputSizeHandler}>
                     <option value={SMALL_INPUT}>Small</option>
-                    <option value={MEDIUM_INPUT}>Medium</option>
+                    <option selected value={MEDIUM_INPUT}>Medium</option>
                     <option value={LARGE_INPUT}>Large</option>
                     <option>4</option>
                     <option>5</option>
@@ -83,7 +89,7 @@ class App extends React.Component {
                 </Form.Group>
               </Col>
               <Col>
-                <Form.Group controlId="formBasicRangeCustom">
+                <Form.Group controlId="formBasicRangeCustom" >
                     <Form.Label>Animation Speed</Form.Label>
                     <Form.Control type="range" custom />
                 </Form.Group>
@@ -99,8 +105,8 @@ class App extends React.Component {
         <Container>
           <SortingVisualizer 
             size={this.state.arraySize}
-            method={"MERGE_SORT"}/>
-          <div className="article">article about xxxx sorting algorithm</div>
+            sortingMethod={this.state.sortingMethod}/>
+          
         </Container>
 
 
@@ -110,5 +116,7 @@ class App extends React.Component {
   }
 
 }
+
+
 
 export default App;

@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import './SortingVisualizer.css';
 import {getMergeSortAnimations, getInsertionSortAnimations, getQuickSortAnimations, getBubbleSortAnimations} from './algo';
 import Button from 'react-bootstrap/Button';
-// import DropdownButton from 'react-bootstrap/DropdownButton';
-// import Dropdown from 'react-bootstrap/Dropdown';
 import shortid from "shortid";
 
-const ARRAY_SIZE = 50;
 const SPEED = 5;
 const HEIGHT_FACTOR = 2.5;
 const WIDTH_FACTOR = 1000;
+const TIMEOUT = 300
 
-
+const MERGE_SORT = "MERGE_SORT";
+const INSERTION_SORT = "INSERTION_SORT";
+const QUICK_SORT = "QUICK_SORT";
+const BUBBLE_SORT = "BUBBLE_SORT";
 
 export default class SortingVisualizer extends Component {
 
@@ -20,8 +21,7 @@ export default class SortingVisualizer extends Component {
 		this.state = {
 			array:[],
 			referenceArray:[],
-			sortingMethod: 'MergeSort',     // Merge, Bubble, Quick, Insertion
-			isFinished: false,
+			isFinished: true,
 			isPause: false,
 		};
 
@@ -30,6 +30,16 @@ export default class SortingVisualizer extends Component {
 	componentDidMount(){
 		this.generateNewArray();
 		
+	}
+	
+	componentDidUpdate(prevProps){
+		// 这一个class， <SortingVisualizer> component 整体的props有没有发生变化？
+
+		if(prevProps.size != this.props.size){
+			this.generateNewArray();
+
+		}
+
 	}
     
 	generateNewArray(){
@@ -41,38 +51,65 @@ export default class SortingVisualizer extends Component {
 		};
 		this.setState({array: newArray});
 		this.setState({referenceArray: newArray.slice()});
+		document.getElementById('comparsion-count').textContent = 0
 
+		// set the comparsion count to zero
+
+	}
+
+	finishSortingHandler(){
+		this.setState({isFinished: true});
+		// make buttons active
 	}
 
 	startSortingHandler(){
 
-		// var solutionAnimation = getMergeSortAnimations(this.state.array.slice());
-		// var solutionAnimation = getQuickSortAnimations(this.state.array.slice());
-		// var solutionAnimation = getInsertionSortAnimations(this.state.array.slice());
-		var solutionAnimation = getBubbleSortAnimations(this.state.array.slice());
+		var solutionAnimation;
+		
+		switch(this.props.sortingMethod){
+			case "MERGE_SORT":
+				solutionAnimation = getMergeSortAnimations(this.state.array.slice());
+				break;
+			case "INSERTION_SORT":
+				solutionAnimation = getInsertionSortAnimations(this.state.array.slice());
+				break;
+			case "QUICK_SORT":
+				solutionAnimation = getQuickSortAnimations(this.state.array.slice());
+				break;
+			case "BUBBLE_SORT":
+				solutionAnimation = getBubbleSortAnimations(this.state.array.slice());
+				break;
+		}
 
 		const arrayBars = document.getElementsByClassName('Array-bar');
-		// console.log(arrayBars);
+		const comparsionCount = document.getElementById('comparsion-count');
 		solutionAnimation.forEach((animation, index) => {
 			setTimeout(() => {
+
+					// console.log( index,"comparsion has been done")
+					comparsionCount.textContent = index;
 				
 					const oldIndex = animation[0];
 					const newHeight = animation[1] / HEIGHT_FACTOR;
 					arrayBars[oldIndex].style.height = `${newHeight}px`;
 					arrayBars[oldIndex].style.color = "green";
 				
-			}, SPEED * (index + 1));
+			}, SPEED * (index + 1)+ TIMEOUT);
 		});
+
+		setTimeout(() => {
+			console.log("FINISHED!")
+
+		}, SPEED * solutionAnimation.length + 500)
 	}
 
 
 
 
   render(){
-		console.log("child component size:", this.props.size)
 		const {array} = this.state;
 
-
+		console.log()
 
 		return (
 			<>
@@ -93,6 +130,7 @@ export default class SortingVisualizer extends Component {
 						</div>
 					))}
 				</div>
+				<div> <strong id='comparsion-count'> 0 </strong> comparsion has been done</div>
 			</>
 			);
 
